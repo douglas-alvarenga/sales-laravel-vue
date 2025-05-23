@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
+use App\Jobs\SendDailySalesReportJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +17,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->job(
+            new SendDailySalesReportJob('seller', Carbon::parse('now', 'America/Sao_Paulo')
+                ->subDay()
+                ->setTimezone('UTC')
+                ->format('Y-m-d'))
+        )->everyMinute()->timezone('America/Sao_Paulo')->withoutOverlapping(60)->name('sendDailySalesReportJob:seller')->onOneServer();
+
+        $schedule->job(
+            new SendDailySalesReportJob('admin', Carbon::parse('now', 'America/Sao_Paulo')
+                ->subDay()
+                ->setTimezone('UTC')
+                ->format('Y-m-d'))
+        )->everyMinute()->timezone('America/Sao_Paulo')->withoutOverlapping(60)->name('sendDailySalesReportJob:admin')->onOneServer();
     }
 
     /**
@@ -25,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
