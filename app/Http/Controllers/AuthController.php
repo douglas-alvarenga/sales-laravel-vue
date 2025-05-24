@@ -46,4 +46,9 @@ class AuthController extends Controller
         auth()->logout();
         return ApiHelper::responseSuccess();
     }
+
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
 }

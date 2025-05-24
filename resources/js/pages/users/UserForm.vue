@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ isEdit ? 'Editar' : isView ? 'Visualizar' : 'Novo' }} Usuário</h2>
+    <h2>{{ isEdit ? 'Editar' : 'Novo' }} Usuário</h2>
 
     <form @submit.prevent="save">
       <input v-model="form.user.name" placeholder="Nome" required />
@@ -15,19 +15,19 @@
 </template>
 
 <script>
-import api from '../../axios'
+import api from '../../services/api.js'
 
 export default {
   data() {
     return {
       form: {
         user: {
-            name: '',
-            username: '',
-            email: '',
-            password: ''
+          name: '',
+          username: '',
+          email: '',
+          password: ''
         }
-        
+
       }
     }
   },
