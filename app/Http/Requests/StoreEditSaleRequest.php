@@ -24,7 +24,7 @@ class StoreEditSaleRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:0.01',
             'seller_id' => 'required|exists:sellers,id',
             'date' => 'required|date|date_format:Y-m-d H:i:s|before_or_equal:now',
             'seller_commision_percentage' => 'nullable|numeric',
