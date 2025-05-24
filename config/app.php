@@ -188,6 +188,7 @@ return [
 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        LaravelLegends\PtBrValidator\ValidatorProvider::class,
 
         /*
          * Application Service Providers...
