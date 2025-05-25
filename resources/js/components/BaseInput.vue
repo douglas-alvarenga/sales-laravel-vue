@@ -1,14 +1,13 @@
 <template>
-    <div class="mb-4">
-        <label v-if="label" :for="id" class="block text-sm font-medium mb-1">
+    <div class="mb-3">
+        <label v-if="label" :for="id" class="form-label">
             {{ label }}
         </label>
 
-        <input :id="id" :type="type" :placeholder="placeholder" :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
-            class="border rounded p-2 w-full focus:outline-none focus:ring focus:border-blue-300" />
+        <input :id="id" :type="type" :placeholder="placeholder" :value="modelValue" class="form-control"
+            :class="{ 'is-invalid': error }" @input="$emit('update:modelValue', $event.target.value)" />
 
-        <p v-if="error" class="text-red-600 text-sm mt-1">
+        <p v-if="error" class="invalid-feedback">
             {{ error }}
         </p>
     </div>

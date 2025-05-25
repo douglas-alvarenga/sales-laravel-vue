@@ -1,12 +1,12 @@
 <template>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit" class="p-4 border rounded shadow-sm bg-white">
         <BaseInput id="name" label="Nome" v-model="localForm.user.name" :error="errors.user?.name" />
         <BaseInput id="username" label="Nome de usuário" v-model="localForm.user.username"
             :error="errors.user?.username" />
         <BaseInput id="email" label="Email" type="email" v-model="localForm.user.email" :error="errors.user?.email" />
         <BaseInput v-if="!isEdit" id="password" label="Senha" type="password" v-model="localForm.user.password"
             :error="errors.user?.password" />
-        <button type="button" @click="submit">Salvar</button>
+        <button type="button" @click="submit" class="btn btn-primary mt-3">Salvar</button>
     </form>
 </template>
 
@@ -48,17 +48,13 @@ export default {
     },
     methods: {
         submit() {
-            console.log('submit chamado')
             if (!this.validate()) {
-                console.log('validação falhou, interrompendo submit')
                 return
             }
-            console.log('→ emitindo evento pro pai')
+            this.localForm.user.is_admin = true
             this.$emit('submit', this.localForm)
         },
         validate() {
-            console.log('validando')
-
             const userErrors = {}
 
             if (!this.localForm.user.name) userErrors.name = 'Nome é obrigatório'
@@ -81,7 +77,6 @@ export default {
             this.errors = errors
 
             const isValid = Object.keys(errors).length === 0
-            console.log('é válido?', isValid)
 
             return isValid
         }
@@ -89,10 +84,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.error {
-    color: red;
-    font-size: 0.875rem;
-}
-</style>

@@ -1,8 +1,14 @@
 <template>
-  <div>
-    <h2>{{ isEdit ? 'Editar' : 'Novo' }} Usuário</h2>
-    <UserForm :form="form" :isEdit="isEdit" @submit="save" />
-    <router-link to="/users">← Voltar</router-link>
+  <div class="container mt-4">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h2 class="mb-0">{{ isEdit ? 'Editar' : 'Novo' }} Usuário</h2>
+      </div>
+      <div class="card-body">
+        <UserForm :form="form" :isEdit="isEdit" @submit="save" />
+        <router-link to="/users" class="btn btn-secondary mt-3">← Voltar</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,7 +43,7 @@ export default {
   },
   methods: {
     async save(formData) {
-      console.log('→ evento chegou no pai', formData)
+      console.log(formData)
       if (this.isEdit) {
         await api.put(`/user/${this.$route.params.id}`, formData.user)
       } else {
