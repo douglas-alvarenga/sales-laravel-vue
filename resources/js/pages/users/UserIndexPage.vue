@@ -1,5 +1,32 @@
 <template>
-  <div class="container mt-4">
+  <div class="d-flex">
+    <Sidebar />
+    <div class="flex-grow-1 p-4">
+      <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1>Usuários</h1>
+          <router-link to="/users/form" class="btn btn-primary">Novo Usuário</router-link>
+        </div>
+
+        <ul class="list-group">
+          <li v-for="user in users" :key="user.id"
+            class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ user.name }}</strong> - {{ user.email }}
+            </div>
+            <div>
+              <router-link :to="`/users/${user.id}`" class="btn btn-sm btn-info me-2">Ver</router-link>
+              <router-link :to="`/users/form/${user.id}`" class="btn btn-sm btn-warning me-2">Editar</router-link>
+              <button @click="deleteUser(user.id)" class="btn btn-sm btn-danger">Excluir</button>
+            </div>
+          </li>
+        </ul>
+        <router-link to="/" class="btn btn-secondary mt-3">← Voltar</router-link>
+      </div>
+      <router-view />
+    </div>
+  </div>
+  <!-- <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1>Usuários</h1>
       <router-link to="/users/form" class="btn btn-primary">Novo Usuário</router-link>
@@ -19,7 +46,7 @@
       </li>
     </ul>
     <router-link to="/" class="btn btn-secondary mt-3">← Voltar</router-link>
-  </div>
+  </div> -->
 </template>
 
 

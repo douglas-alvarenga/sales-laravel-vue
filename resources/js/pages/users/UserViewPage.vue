@@ -1,15 +1,18 @@
 <template>
-  <div class="container mt-4">
-    <h2 class="mb-4">Visualizar Usuário</h2>
+  <div class="d-flex">
+    <Sidebar />
+    <div class="flex-grow-1 p-4"></div>
+    <div class="container mt-4">
+      <h2 class="mb-4">Visualizar Usuário</h2>
+      <div class="card p-3 mb-4">
+        <p><strong>Nome:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+      </div>
 
-    <div class="card p-3 mb-4">
-      <p><strong>Nome:</strong> {{ user.name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
+      <router-link to="/users" class="btn btn-secondary">
+        ← Voltar
+      </router-link>
     </div>
-
-    <router-link to="/users" class="btn btn-secondary">
-      ← Voltar
-    </router-link>
   </div>
 </template>
 

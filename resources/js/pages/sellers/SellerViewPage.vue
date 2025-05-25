@@ -1,15 +1,19 @@
 <template>
-    <div class="container mt-4">
-        <h2 class="mb-4">Visualizar Vendedor</h2>
+    <div class="d-flex">
+        <Sidebar />
+        <div class="flex-grow-1 p-4"></div>
+        <div class="container mt-4">
+            <h2 class="mb-4">Visualizar Vendedor</h2>
 
-        <div class="card p-3 mb-4">
-            <p><strong>Nome:</strong> {{ seller.name }}</p>
-            <p><strong>Email:</strong> {{ seller.email }}</p>
+            <div class="card p-3 mb-4">
+                <p><strong>Nome:</strong> {{ seller.name }}</p>
+                <p><strong>Email:</strong> {{ seller.email }}</p>
+            </div>
+
+            <router-link to="/sellers" class="btn btn-secondary">
+                ← Voltar
+            </router-link>
         </div>
-
-        <router-link to="/sellers" class="btn btn-secondary">
-            ← Voltar
-        </router-link>
     </div>
 </template>
 

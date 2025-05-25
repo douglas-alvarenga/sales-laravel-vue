@@ -3,9 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import api from "./services/api";
 import "../css/app.css";
+import Sidebar from "./components/Sidebar.vue";
 
 const app = createApp(App);
 app.use(router);
+app.component("Sidebar", Sidebar);
 app.mount("#app");
 
 router.beforeEach(async (to, from, next) => {
