@@ -14,6 +14,10 @@ class Sale extends Model
     use Cachable;
     use SoftDeletes;
 
+    protected $with = [
+        'seller',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

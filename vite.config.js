@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import laravel from "laravel-vite-plugin";
 
-/* export default defineConfig({
+export default defineConfig({
     plugins: [
         vue(),
         laravel({
@@ -10,16 +10,4 @@ import laravel from "laravel-vite-plugin";
             refresh: true,
         }),
     ],
-});
- */
-export default defineConfig({
-    plugins: [vue()],
-    resolve: {
-        alias: {
-            "@": "/resources/js",
-        },
-    },
-    build: {
-        outDir: "public/build",
-    },
 });

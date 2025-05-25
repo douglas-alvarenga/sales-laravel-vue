@@ -8,6 +8,9 @@ import UserView from "./pages/users/UserViewPage.vue";
 import SellerIndex from "./pages/sellers/SellerIndexPage.vue";
 import SellerForm from "./pages/sellers/SellerFormPage.vue";
 import SellerView from "./pages/sellers/SellerViewPage.vue";
+import SaleIndex from "./pages/sales/SaleIndexPage.vue";
+import SaleForm from "./pages/sales/SaleFormPage.vue";
+import SaleView from "./pages/sales/SaleViewPage.vue";
 
 const routes = [
     { path: "/login", name: "login", component: Login },
@@ -34,6 +37,22 @@ const routes = [
     {
         path: "/sellers/:id",
         component: SellerView,
+        meta: { requiresAuth: true },
+    },
+    { path: "/sales", component: SaleIndex, meta: { requiresAuth: true } },
+    {
+        path: "/sales/form",
+        component: SaleForm,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/sales/form/:id",
+        component: SaleForm,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/sales/:id",
+        component: SaleView,
         meta: { requiresAuth: true },
     },
 ];
