@@ -5,6 +5,9 @@ import Home from "./pages/Home.vue";
 import UserIndex from "./pages/users/UserIndexPage.vue";
 import UserForm from "./pages/users/UserFormPage.vue";
 import UserView from "./pages/users/UserViewPage.vue";
+import SellerIndex from "./pages/sellers/SellerIndexPage.vue";
+import SellerForm from "./pages/sellers/SellerFormPage.vue";
+import SellerView from "./pages/sellers/SellerViewPage.vue";
 
 const routes = [
     { path: "/login", name: "login", component: Login },
@@ -17,6 +20,22 @@ const routes = [
         meta: { requiresAuth: true },
     },
     { path: "/users/:id", component: UserView, meta: { requiresAuth: true } },
+    { path: "/sellers", component: SellerIndex, meta: { requiresAuth: true } },
+    {
+        path: "/sellers/form",
+        component: SellerForm,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/sellers/form/:id",
+        component: SellerForm,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/sellers/:id",
+        component: SellerView,
+        meta: { requiresAuth: true },
+    },
 ];
 
 const router = createRouter({

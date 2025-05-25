@@ -4,6 +4,7 @@
     <nav class="mb-3">
       <router-link to="/" class="btn btn-link p-0 me-2">Home</router-link>
       <router-link to="/users" class="btn btn-link p-0">Usuários</router-link>
+      <router-link to="/sellers" class="btn btn-link p-0">Vendedores</router-link>
     </nav>
     <button @click="logout" class="btn btn-danger">Sair</button>
   </div>
