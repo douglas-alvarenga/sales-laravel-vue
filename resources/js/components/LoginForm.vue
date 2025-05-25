@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <h1>Login</h1>
+  <div class="container mt-5" style="max-width: 400px;">
+    <h1 class="mb-4">Login</h1>
     <form @submit.prevent="login">
-      <input v-model="email" type="email" placeholder="Email" />
-      <input v-model="password" type="password" placeholder="Senha" />
-      <button type="submit">Entrar</button>
-      <p v-if="error" style="color: red">{{ error }}</p>
+      <div class="mb-3">
+        <input v-model="email" type="email" placeholder="Email" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <input v-model="password" type="password" placeholder="Senha" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+      <p v-if="error" class="text-danger mt-3">{{ error }}</p>
     </form>
   </div>
 </template>
+
 
 <script>
 import api from '../services/api.js'

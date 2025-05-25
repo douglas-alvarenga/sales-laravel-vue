@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <h2>Bem-vindo ao painel!</h2>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/users">Usuários</router-link>
+  <div class="container mt-4">
+    <h2 class="mb-4">Menu inicial</h2>
+    <nav class="mb-3">
+      <router-link to="/" class="btn btn-link p-0 me-2">Home</router-link>
+      <router-link to="/users" class="btn btn-link p-0">Usuários</router-link>
     </nav>
-    <button @click="logout">Sair</button>
+    <button @click="logout" class="btn btn-danger">Sair</button>
   </div>
 </template>
+
 
 <script>
 export default {
