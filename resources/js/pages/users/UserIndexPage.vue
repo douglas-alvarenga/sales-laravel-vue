@@ -18,6 +18,7 @@
         </div>
       </li>
     </ul>
+    <router-link to="/" class="btn btn-secondary mt-3">← Voltar</router-link>
   </div>
 </template>
 
