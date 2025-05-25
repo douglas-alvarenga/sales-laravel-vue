@@ -8,15 +8,16 @@
             maxlength="50" required />
         <BaseInput v-if="!isEdit" id="password" label="Senha" type="password" v-model="localForm.user.password"
             :error="errors.user?.password" minlength="4" maxlength="20" :required="!isEdit" />
-        <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+        <SaveButton :loading="loading" @click="submit" />
     </form>
 </template>
 
 <script>
 import BaseInput from "@/components/BaseInput.vue";
+import SaveButton from "@/components/SaveButton.vue"
 
 export default {
-    components: { BaseInput },
+    components: { BaseInput, SaveButton },
     props: {
         form: {
             type: Object,
@@ -25,6 +26,14 @@ export default {
         isEdit: {
             type: Boolean,
             default: false,
+        },
+        apiErrors: {
+            type: Object,
+            default: () => ({})
+        },
+        loading: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -45,6 +54,12 @@ export default {
             immediate: true,
             handler(newVal) {
                 this.localForm = { ...newVal }
+            }
+        },
+        apiErrors: {
+            immediate: true,
+            handler(newErrors) {
+                this.errors = { ...this.errors, ...newErrors };
             }
         }
     },
