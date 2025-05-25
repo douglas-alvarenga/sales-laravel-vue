@@ -4,7 +4,7 @@
 
         <div class="card p-3 mb-4">
             <p><strong>Vendedor:</strong> {{ sale.seller.name }}</p>
-            <p><strong>Data:</strong> {{ sale.date }}</p>
+            <p><strong>Data:</strong> {{ formatDatetime(sale.date, { seconds: false }) }}</p>
             <p>
                 <strong>Comissão ({{ formatPercent(sale.seller_commission_percentage) }}):</strong>
                 {{ formatCurrency(sale.seller_commission_amount) }}
@@ -21,7 +21,7 @@
 
 <script>
 import api from '../../services/api.js'
-import { formatDate, formatCurrency, formatPercent } from '@/utils/formatUtils.js'
+import { formatDatetime, formatCurrency, formatPercent } from '@/utils/formatUtils.js'
 
 export default {
     data() {
@@ -32,7 +32,7 @@ export default {
         }
     },
     methods: {
-        formatDate,
+        formatDatetime,
         formatCurrency,
         formatPercent
     },

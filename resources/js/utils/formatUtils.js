@@ -1,6 +1,30 @@
-export function formatDate(dateString, locale = "pt-BR") {
-    const date = new Date(dateString);
+export function formatDate(strDate, locale = "pt-BR") {
+    const date = new Date(strDate);
+    if (isNaN(date.getTime())) return "";
     return date.toLocaleDateString(locale);
+}
+
+export function formatDatetime(
+    strDate,
+    { locale = "pt-BR", seconds = true } = {}
+) {
+    const date = new Date(strDate);
+    if (isNaN(date.getTime())) return "";
+
+    const timeFormat = seconds
+        ? {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+          }
+        : {
+              hour: "2-digit",
+              minute: "2-digit",
+          };
+    const formattedDate = date.toLocaleDateString(locale);
+    const formattedTime = date.toLocaleTimeString(locale, timeFormat);
+
+    return `${formattedDate} ${formattedTime}`;
 }
 
 export function formatPercent(number, locale = "pt-BR") {

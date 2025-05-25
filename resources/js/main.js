@@ -28,24 +28,4 @@ router.beforeEach(async (to, from, next) => {
     } else {
         next();
     }
-    /* 
-    if (to.path === "/login") {
-        return next();
-    }
-
-    if (!token && to.meta.requiresAuth) {
-        return next("/login");
-    }
-
-    if (token && to.meta.requiresAuth) {
-        try {
-            await api.get("/me"); // valida se token é realmente válido
-            next();
-        } catch (error) {
-            localStorage.removeItem("auth_token");
-            return next("/login");
-        }
-    } else {
-        next();
-    } */
 });

@@ -3,7 +3,7 @@
         <label v-if="label" :for="id" class="form-label">
             {{ label }}
         </label>
-        <select :id="id" class="form-select" :value="modelValue"
+        <select :id="id" class="form-select" :value="modelValue" :class="{ 'is-invalid': error }"
             @input="$emit('update:modelValue', $event.target.value)">
             <option value="">Selecione</option>
             <option v-for="option in options" :key="option[valueKey]" :value="option[valueKey]">{{ option[labelKey] }}
@@ -22,7 +22,6 @@ export default {
     props: {
         id: { type: String, required: true },
         label: { type: String, default: "" },
-        //modelValue: [String, Number],
         error: { type: String, default: "" },
         options: { type: [Array, Object], required: true },
         modelValue: [String, Number],

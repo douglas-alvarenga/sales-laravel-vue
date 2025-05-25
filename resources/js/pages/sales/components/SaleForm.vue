@@ -1,10 +1,10 @@
 <template>
     <form @submit.prevent="submit" class="p-4 border rounded shadow-sm bg-white">
-        <BaseSelect v-model="localForm.sale.seller_id" id="seller" label="Vendedor" :error="errors.sale?.seller_id"
+        <BaseSelect v-model="localForm.sale.seller_id" id="seller_id" label="Vendedor" :error="errors.sale?.seller_id"
             required :options="sellers" />
-        <BaseInput id="date" label="Data" type="datetime" v-model="localForm.sale.date" :error="errors.sale?.date"
+        <DatetimeInput id="date" label="Data" type="datetime" v-model="localForm.sale.date" :error="errors.sale?.date"
             required />
-        <BaseInput id="amount" label="Valor total" type="number" v-model="localForm.sale.amount"
+        <CurrencyInput id="amount" label="Valor total" type="number" v-model="localForm.sale.amount"
             :error="errors.sale?.amount" required />
         <SaveButton :loading="loading" @click="submit" />
     </form>
@@ -14,10 +14,12 @@
 import BaseInput from "@/components/BaseInput.vue";
 import SaveButton from "@/components/SaveButton.vue"
 import BaseSelect from "@/components/BaseSelect.vue"
+import CurrencyInput from "@/components/CurrencyInput.vue"
+import DatetimeInput from "@/components/DatetimeInput.vue"
 
 export default {
     components: {
-        BaseInput, SaveButton, BaseSelect
+        BaseInput, SaveButton, BaseSelect, CurrencyInput, DatetimeInput
     },
     props: {
         form: {
@@ -75,17 +77,11 @@ export default {
             this.$emit('submit', this.localForm)
         },
         validate() {
-            //TODO: finalizar validacao, mascara e formatacao dos campos
-            //TODO: estilizar home
             const saleErrors = {}
 
             if (!this.localForm.sale.seller_id) saleErrors.seller_id = 'Vendedor é obrigatório'
             if (!this.localForm.sale.date) saleErrors.date = 'Data é obrigatória'
-            if (!this.localForm.sale.amount) {
-                saleErrors.email = 'Valor total é obrigatório'
-            } else if (!/^\S+@\S+\.\S+$/.test(this.localForm.sale.amount)) {
-                //saleErrors.email = 'Valor total inválido'
-            }
+            if (!this.localForm.sale.amount) saleErrors.amount = 'Valor total é obrigatório'
 
             const errors = {}
             if (Object.keys(saleErrors).length > 0) {

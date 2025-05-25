@@ -30,4 +30,11 @@ class StoreEditSaleRequest extends FormRequest
             'seller_commision_percentage' => 'nullable|numeric',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'date.before_or_equal' => 'Data não pode ser futura',
+        ];
+    }
 }
