@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit" class="p-4 border rounded shadow-sm bg-white">
-        <BaseInput id="seller" label="Vendedor" type="combobox" v-model="localForm.sale.seller_id"
-            :error="errors.sale?.seller_id" required />
+        <BaseSelect v-model="localForm.sale.seller_id" id="seller" label="Vendedor" :error="errors.sale?.seller_id"
+            required :options="sellers" />
         <BaseInput id="date" label="Data" type="datetime" v-model="localForm.sale.date" :error="errors.sale?.date"
             required />
         <BaseInput id="amount" label="Valor total" type="number" v-model="localForm.sale.amount"
@@ -13,9 +13,12 @@
 <script>
 import BaseInput from "@/components/BaseInput.vue";
 import SaveButton from "@/components/SaveButton.vue"
+import BaseSelect from "@/components/BaseSelect.vue"
 
 export default {
-    components: { BaseInput, SaveButton },
+    components: {
+        BaseInput, SaveButton, BaseSelect
+    },
     props: {
         form: {
             type: Object,
@@ -32,6 +35,10 @@ export default {
         loading: {
             type: Boolean,
             default: false
+        },
+        sellers: {
+            type: [Array, Object],
+            required: true
         }
     },
     data() {
@@ -43,7 +50,7 @@ export default {
                     amount: '',
                 }
             },
-            errors: {}
+            errors: {},
         }
     },
     watch: {
@@ -68,10 +75,12 @@ export default {
             this.$emit('submit', this.localForm)
         },
         validate() {
+            //TODO: finalizar validacao, mascara e formatacao dos campos
+            //TODO: estilizar home
             const saleErrors = {}
 
             if (!this.localForm.sale.seller_id) saleErrors.seller_id = 'Vendedor é obrigatório'
-            if (!this.localForm.sale.date) saleErrors.date = 'Vendedor é obrigatório'
+            if (!this.localForm.sale.date) saleErrors.date = 'Data é obrigatória'
             if (!this.localForm.sale.amount) {
                 saleErrors.email = 'Valor total é obrigatório'
             } else if (!/^\S+@\S+\.\S+$/.test(this.localForm.sale.amount)) {

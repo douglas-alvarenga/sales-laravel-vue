@@ -2,10 +2,10 @@
     <div class="container mt-4">
         <div class="card shadow-sm">
             <div class="card-header">
-                <h2 class="mb-0">{{ isEdit ? 'Editar' : 'Novo' }} Venda</h2>
+                <h2 class="mb-0">{{ isEdit ? 'Editar' : 'Nova' }} Venda</h2>
             </div>
             <div class="card-body">
-                <SaleForm :form="form" :isEdit="isEdit" :apiErrors="formErrors" @submit="save" />
+                <SaleForm :form="form" :isEdit="isEdit" :sellers="sellers" :apiErrors="formErrors" @submit="save" />
                 <router-link to="/sales" class="btn btn-secondary mt-3">← Voltar</router-link>
             </div>
         </div>
@@ -23,11 +23,12 @@ export default {
         return {
             form: {
                 sale: {
-                    sale_id: '',
+                    seller_id: '',
                     date: '',
                     amount: '',
                 }
             },
+            sellers: {},
             formErrors: {},
             loading: false
         }
@@ -42,6 +43,8 @@ export default {
             const { data } = await api.get(`/sale/${this.$route.params.id}`)
             this.form = { ...data.data }
         }
+        const response = await api.get('/seller')
+        this.sellers = response.data.data.sellers
     },
     methods: {
         async save(formData) {

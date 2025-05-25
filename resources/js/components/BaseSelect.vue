@@ -3,10 +3,12 @@
         <label v-if="label" :for="id" class="form-label">
             {{ label }}
         </label>
-
-        <input :id="id" :type="type" :placeholder="placeholder" :value="modelValue" class="form-control" v-bind="$attrs"
-            :class="{ 'is-invalid': error }" @input="$emit('update:modelValue', $event.target.value)" />
-
+        <select :id="id" class="form-select" :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)">
+            <option value="">Selecione</option>
+            <option v-for="option in options" :key="option[valueKey]" :value="option[valueKey]">{{ option[labelKey] }}
+            </option>
+        </select>
         <p v-if="error" class="invalid-feedback">
             {{ error }}
         </p>
@@ -15,15 +17,23 @@
 
 <script>
 export default {
-    name: "BaseInput",
+    name: "BaseSelect",
     inheritAttrs: false,
     props: {
         id: { type: String, required: true },
         label: { type: String, default: "" },
-        modelValue: [String, Number],
-        type: { type: String, default: "text" },
-        placeholder: { type: String, default: "" },
+        //modelValue: [String, Number],
         error: { type: String, default: "" },
+        options: { type: [Array, Object], required: true },
+        modelValue: [String, Number],
+        valueKey: {
+            type: String,
+            default: 'id'
+        },
+        labelKey: {
+            type: String,
+            default: 'name'
+        }
     },
 };
 </script>
