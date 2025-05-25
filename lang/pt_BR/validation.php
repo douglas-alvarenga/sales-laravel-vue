@@ -235,7 +235,11 @@ return [
         'modality' => 'modalidade',
         'category' => 'categoria',
         'blood_type' => 'tipo sanguíneo',
-        'birth_date' => 'data de nascimento'
+        'birth_date' => 'data de nascimento',
+        'amount' => 'valor total',
+        'seller_commision_amount' => 'valor total da comissão do vendedor',
+        'seller_comission_percentage' => 'porcentagem de comissão do vendedor',
+        'seller_id' => 'vendedor'
     ],
 
 ];
