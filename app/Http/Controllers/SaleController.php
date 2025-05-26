@@ -17,7 +17,7 @@ class SaleController extends Controller
      * Lista vendas
      * Possível filtrar por vendedor, caso informado
      *
-     * @param Request $request
+     * @param  Request $request
      * @return JsonResponse
      */
     public function index(Request $request): JsonResponse
@@ -30,7 +30,7 @@ class SaleController extends Controller
     /**
      * Cadastra venda
      *
-     * @param StoreEditSaleRequest $request
+     * @param  StoreEditSaleRequest $request
      * @return JsonResponse
      */
     public function store(StoreEditSaleRequest $request): JsonResponse
@@ -48,8 +48,8 @@ class SaleController extends Controller
     /**
      * Atualiza venda
      *
-     * @param StoreEditSaleRequest $request
-     * @param Sale $sale
+     * @param  StoreEditSaleRequest $request
+     * @param  Sale                 $sale
      * @return JsonResponse
      */
     public function update(StoreEditSaleRequest $request, Sale $sale): JsonResponse
@@ -66,7 +66,7 @@ class SaleController extends Controller
     /**
      * Exclui venda
      *
-     * @param Sale $sale
+     * @param  Sale $sale
      * @return JsonResponse
      */
     public function destroy(Sale $sale): JsonResponse
@@ -83,7 +83,7 @@ class SaleController extends Controller
     /**
      * Restaura venda excluída
      *
-     * @param integer $saleId
+     * @param  integer $saleId
      * @return JsonResponse
      */
     public function restore(int $saleId): JsonResponse
@@ -103,7 +103,7 @@ class SaleController extends Controller
     /**
      * Exibe uma venda específica
      *
-     * @param Sale $sale
+     * @param  Sale $sale
      * @return JsonResponse
      */
     public function show(Sale $sale): JsonResponse

@@ -26,7 +26,7 @@ class SellerController extends Controller
     /**
      * Cadastra vendedor
      *
-     * @param StoreEditSellerRequest $request
+     * @param  StoreEditSellerRequest $request
      * @return JsonResponse
      */
     public function store(StoreEditSellerRequest $request): JsonResponse
@@ -44,8 +44,8 @@ class SellerController extends Controller
     /**
      * Atualiza vendedor
      *
-     * @param StoreEditSellerRequest $request
-     * @param Seller $seller
+     * @param  StoreEditSellerRequest $request
+     * @param  Seller                 $seller
      * @return JsonResponse
      */
     public function update(StoreEditSellerRequest $request, Seller $seller): JsonResponse
@@ -62,7 +62,7 @@ class SellerController extends Controller
     /**
      * Remove vendedor
      *
-     * @param Seller $seller
+     * @param  Seller $seller
      * @return JsonResponse
      */
     public function destroy(Seller $seller): JsonResponse
@@ -79,7 +79,7 @@ class SellerController extends Controller
     /**
      * Restaura vendedor removido
      *
-     * @param integer $sellerId
+     * @param  integer $sellerId
      * @return JsonResponse
      */
     public function restore(int $sellerId): JsonResponse
@@ -98,7 +98,7 @@ class SellerController extends Controller
     /**
      * Exibe vendedor
      *
-     * @param Seller $seller
+     * @param  Seller $seller
      * @return JsonResponse
      */
     public function show(Seller $seller): JsonResponse
@@ -114,9 +114,9 @@ class SellerController extends Controller
     /**
      * Envia email com resumo diário da vendas ao vendedor
      *
-     * @param SendDailySalesReportRequest $request
-     * @param Seller $seller
-     * @param DailySalesReportService $service
+     * @param  SendDailySalesReportRequest $request
+     * @param  Seller                      $seller
+     * @param  DailySalesReportService     $service
      * @return JsonResponse
      */
     public function sendDailySalesReport(SendDailySalesReportRequest $request, Seller $seller, DailySalesReportService $service): JsonResponse

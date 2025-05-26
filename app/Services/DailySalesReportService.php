@@ -21,13 +21,15 @@ class DailySalesReportService
         $totals = $this->getTotals($sales);
 
         try {
-            Mail::to($seller->email)->send(new DailySalesReportToSellerMail(
-                $seller,
-                $totals['amount'],
-                $totals['sellerCommission'],
-                $totals['count'],
-                $dates['paramDate']
-            ));
+            Mail::to($seller->email)->send(
+                new DailySalesReportToSellerMail(
+                    $seller,
+                    $totals['amount'],
+                    $totals['sellerCommission'],
+                    $totals['count'],
+                    $dates['paramDate']
+                )
+            );
         } catch (\Exception $e) {
             Log::error("Falha ao enviar email de relatório diário para vendedor", [$e->getMessage()]);
             return false;
@@ -42,12 +44,14 @@ class DailySalesReportService
         $totals = $this->getTotals($sales);
 
         try {
-            Mail::to($user->email)->send(new DailySalesReportToAdminMail(
-                $totals['amount'],
-                $totals['sellerCommission'],
-                $totals['count'],
-                $dates['paramDate']
-            ));
+            Mail::to($user->email)->send(
+                new DailySalesReportToAdminMail(
+                    $totals['amount'],
+                    $totals['sellerCommission'],
+                    $totals['count'],
+                    $dates['paramDate']
+                )
+            );
         } catch (\Exception $e) {
             Log::error("Falha ao enviar email de relatório diário para admin", [$e->getMessage()]);
             return false;

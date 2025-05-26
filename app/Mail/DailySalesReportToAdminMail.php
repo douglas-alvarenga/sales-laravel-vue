@@ -21,7 +21,8 @@ class DailySalesReportToAdminMail extends Mailable implements ShouldQueue
         public float $totalCommission,
         public int $salesCount,
         public string $date
-    ) {}
+    ) {
+    }
 
     public function build()
     {

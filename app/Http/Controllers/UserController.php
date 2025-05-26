@@ -24,7 +24,7 @@ class UserController extends Controller
     /**
      * Cadastra usuário
      *
-     * @param StoreEditUserRequest $request
+     * @param  StoreEditUserRequest $request
      * @return JsonResponse
      */
     public function store(StoreEditUserRequest $request): JsonResponse
@@ -43,8 +43,8 @@ class UserController extends Controller
     /**
      * Atualiza usuário
      *
-     * @param StoreEditUserRequest $request
-     * @param User $user
+     * @param  StoreEditUserRequest $request
+     * @param  User                 $user
      * @return JsonResponse
      */
     public function update(StoreEditUserRequest $request, User $user): JsonResponse
@@ -64,7 +64,7 @@ class UserController extends Controller
     /**
      * Remove usuário
      *
-     * @param User $user
+     * @param  User $user
      * @return JsonResponse
      */
     public function destroy(User $user): JsonResponse
@@ -81,7 +81,7 @@ class UserController extends Controller
     /**
      * Restaura usuário removido
      *
-     * @param integer $userId
+     * @param  integer $userId
      * @return JsonResponse
      */
     public function restore(int $userId): JsonResponse
@@ -101,7 +101,7 @@ class UserController extends Controller
     /**
      * Exibe usuário
      *
-     * @param User $user
+     * @param  User $user
      * @return JsonResponse
      */
     public function show(User $user): JsonResponse

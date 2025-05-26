@@ -13,7 +13,7 @@ class AuthController extends Controller
     /**
      * Realiza o login utilizando usuário e senha
      *
-     * @param LoginUserRequest $request
+     * @param  LoginUserRequest $request
      * @return JsonResponse
      */
     public function login(LoginUserRequest $request): JsonResponse
@@ -25,18 +25,22 @@ class AuthController extends Controller
         }
 
         if (!Hash::check($request->password, $user->password)) {
-            return ApiHelper::responseUnsuccess("Senha incorreta", [
+            return ApiHelper::responseUnsuccess(
+                "Senha incorreta", [
                 Hash::check(
                     $request->password,
                     $user->password
                 )
-            ], 401);
+                ], 401
+            );
         }
 
-        $token = auth()->claims([
+        $token = auth()->claims(
+            [
 
             "exp" => $exp ?? strtotime('now +' . env('JWT_TOKEN_MINUTES', 60) . ' minutes'),
-        ])->login($user);
+            ]
+        )->login($user);
 
         return ApiHelper::responseSuccess(['access_token' => $token, 'user' => $user]);
     }

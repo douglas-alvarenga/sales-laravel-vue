@@ -33,10 +33,12 @@ class Sale extends Model
 
     protected static function booted()
     {
-        static::saving(function ($sale) {
-            $sale->seller_commission_percentage = $sale->seller_commission_percentage ?? env('SELLER_COMMISSION_PERCENTAGE', 8.5);
-            $sale->seller_commission_amount = $sale->amount * ($sale->seller_commission_percentage / 100);
-        });
+        static::saving(
+            function ($sale) {
+                $sale->seller_commission_percentage = $sale->seller_commission_percentage ?? env('SELLER_COMMISSION_PERCENTAGE', 8.5);
+                $sale->seller_commission_amount = $sale->amount * ($sale->seller_commission_percentage / 100);
+            }
+        );
     }
 
     public function seller()

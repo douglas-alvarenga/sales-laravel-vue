@@ -50,15 +50,19 @@ class User extends Authenticatable implements JWTSubject
     {
         parent::boot();
 
-        self::creating(function ($model) {
-            $model->password = Hash::make($model->password);
-        });
-
-        self::updating(function ($model): void {
-            if ($model->isDirty('password')) {
+        self::creating(
+            function ($model) {
                 $model->password = Hash::make($model->password);
             }
-        });
+        );
+
+        self::updating(
+            function ($model): void {
+                if ($model->isDirty('password')) {
+                    $model->password = Hash::make($model->password);
+                }
+            }
+        );
     }
 
     public function scopeAdmin($query)
