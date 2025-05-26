@@ -1,15 +1,17 @@
 <template>
     <div class="d-flex">
         <Sidebar />
-        <div class="flex-grow-1 p-4"></div>
-        <div class="container mt-4">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h2 class="mb-0">{{ isEdit ? 'Editar' : 'Nova' }} Venda</h2>
-                </div>
-                <div class="card-body">
-                    <SaleForm :form="form" :isEdit="isEdit" :sellers="sellers" :apiErrors="formErrors" @submit="save" />
-                    <router-link to="/sales" class="btn btn-secondary mt-3">← Voltar</router-link>
+        <div class="flex-grow-1 p-4">
+            <div class="container mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h2 class="mb-0">{{ isEdit ? 'Editar' : 'Nova' }} Venda</h2>
+                    </div>
+                    <div class="card-body">
+                        <SaleForm :form="form" :isEdit="isEdit" :sellers="sellers" :apiErrors="formErrors"
+                            @submit="save" />
+                        <router-link to="/sales" class="btn btn-secondary mt-3">← Voltar</router-link>
+                    </div>
                 </div>
             </div>
         </div>

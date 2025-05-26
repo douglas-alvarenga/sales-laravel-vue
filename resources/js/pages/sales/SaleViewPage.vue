@@ -1,23 +1,24 @@
 <template>
     <div class="d-flex">
         <Sidebar />
-        <div class="flex-grow-1 p-4"></div>
-        <div class="container mt-4">
-            <h2 class="mb-4">Visualizar Venda</h2>
+        <div class="flex-grow-1 p-4">
+            <div class="container mt-4">
+                <h2 class="mb-4">Visualizar Venda</h2>
 
-            <div class="card p-3 mb-4">
-                <p><strong>Vendedor:</strong> {{ sale.seller.name }}</p>
-                <p><strong>Data:</strong> {{ formatDatetime(sale.date, { seconds: false, toLocale: true }) }}</p>
-                <p>
-                    <strong>Comissão ({{ formatPercent(sale.seller_commission_percentage) }}):</strong>
-                    {{ formatCurrency(sale.seller_commission_amount) }}
-                </p>
-                <p><strong>Valor Total:</strong> {{ formatCurrency(sale.amount) }}</p>
+                <div class="card p-3 mb-4">
+                    <p><strong>Vendedor:</strong> {{ sale.seller.name }}</p>
+                    <p><strong>Data:</strong> {{ formatDatetime(sale.date, { seconds: false, toLocale: true }) }}</p>
+                    <p>
+                        <strong>Comissão ({{ formatPercent(sale.seller_commission_percentage) }}):</strong>
+                        {{ formatCurrency(sale.seller_commission_amount) }}
+                    </p>
+                    <p><strong>Valor Total:</strong> {{ formatCurrency(sale.amount) }}</p>
+                </div>
+
+                <router-link to="/sales" class="btn btn-secondary">
+                    ← Voltar
+                </router-link>
             </div>
-
-            <router-link to="/sales" class="btn btn-secondary">
-                ← Voltar
-            </router-link>
         </div>
     </div>
 </template>
