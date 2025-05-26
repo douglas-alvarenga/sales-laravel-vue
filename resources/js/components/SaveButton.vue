@@ -1,6 +1,6 @@
 <template>
     <button type="button" @click="$emit('click')" class="btn btn-primary mt-3" :disabled="loading">
-        {{ loading ? 'Salvando...' : 'Salvar' }}
+        {{ loading ? buttonTextDisabled : buttonText }}
     </button>
 </template>
 
@@ -12,6 +12,14 @@ export default {
         loading: {
             type: Boolean,
             default: false
+        },
+        buttonText: {
+            type: String,
+            default: 'Salvar'
+        },
+        buttonTextDisabled: {
+            type: String,
+            default: 'Salvando...'
         }
     },
 };
