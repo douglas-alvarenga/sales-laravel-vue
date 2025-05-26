@@ -13,11 +13,22 @@ use App\Http\Requests\SendDailySalesReportRequest;
 
 class SellerController extends Controller
 {
-    public function index()
+    /**
+     * Lista vendedores
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         return ApiHelper::responseSuccess(['sellers' => Seller::all()]);
     }
 
+    /**
+     * Cadastra vendedor
+     *
+     * @param StoreEditSellerRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreEditSellerRequest $request): JsonResponse
     {
         try {
@@ -30,7 +41,14 @@ class SellerController extends Controller
         }
     }
 
-    public function update(StoreEditSellerRequest $request, Seller $seller)
+    /**
+     * Atualiza vendedor
+     *
+     * @param StoreEditSellerRequest $request
+     * @param Seller $seller
+     * @return JsonResponse
+     */
+    public function update(StoreEditSellerRequest $request, Seller $seller): JsonResponse
     {
         try {
             $seller->update($request->all());
@@ -41,6 +59,12 @@ class SellerController extends Controller
         }
     }
 
+    /**
+     * Remove vendedor
+     *
+     * @param Seller $seller
+     * @return JsonResponse
+     */
     public function destroy(Seller $seller): JsonResponse
     {
         try {
@@ -52,7 +76,13 @@ class SellerController extends Controller
         }
     }
 
-    public function restore(int $sellerId)
+    /**
+     * Restaura vendedor removido
+     *
+     * @param integer $sellerId
+     * @return JsonResponse
+     */
+    public function restore(int $sellerId): JsonResponse
     {
         try {
             if (!Seller::withTrashed()->whereId($sellerId)->restore()) {
@@ -65,7 +95,13 @@ class SellerController extends Controller
         }
     }
 
-    public function show(Seller $seller)
+    /**
+     * Exibe vendedor
+     *
+     * @param Seller $seller
+     * @return JsonResponse
+     */
+    public function show(Seller $seller): JsonResponse
     {
         try {
             return ApiHelper::responseSuccess(['seller' => $seller]);
@@ -75,7 +111,15 @@ class SellerController extends Controller
         }
     }
 
-    public function sendDailySalesReport(SendDailySalesReportRequest $request, Seller $seller, DailySalesReportService $service)
+    /**
+     * Envia email com resumo diário da vendas ao vendedor
+     *
+     * @param SendDailySalesReportRequest $request
+     * @param Seller $seller
+     * @param DailySalesReportService $service
+     * @return JsonResponse
+     */
+    public function sendDailySalesReport(SendDailySalesReportRequest $request, Seller $seller, DailySalesReportService $service): JsonResponse
     {
         try {
             if (!$service->sendMailToSeller($seller, $request->date)) {

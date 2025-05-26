@@ -12,13 +12,27 @@ use App\Http\Requests\StoreEditSaleRequest;
 
 class SaleController extends Controller
 {
-    public function index(Request $request)
+
+    /**
+     * Lista vendas
+     * Possível filtrar por vendedor, caso informado
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request): JsonResponse
     {
         $seller = $request->input('seller');
         $sales = ($seller) ? Sale::where(['seller_id' => $seller])->get() : Sale::all();
         return ApiHelper::responseSuccess(['sales' => $sales]);
     }
 
+    /**
+     * Cadastra venda
+     *
+     * @param StoreEditSaleRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreEditSaleRequest $request): JsonResponse
     {
         try {
@@ -31,7 +45,14 @@ class SaleController extends Controller
         }
     }
 
-    public function update(StoreEditSaleRequest $request, Sale $sale)
+    /**
+     * Atualiza venda
+     *
+     * @param StoreEditSaleRequest $request
+     * @param Sale $sale
+     * @return JsonResponse
+     */
+    public function update(StoreEditSaleRequest $request, Sale $sale): JsonResponse
     {
         try {
             $sale->update($request->all());
@@ -42,6 +63,12 @@ class SaleController extends Controller
         }
     }
 
+    /**
+     * Exclui venda
+     *
+     * @param Sale $sale
+     * @return JsonResponse
+     */
     public function destroy(Sale $sale): JsonResponse
     {
         try {
@@ -53,7 +80,13 @@ class SaleController extends Controller
         }
     }
 
-    public function restore(int $saleId)
+    /**
+     * Restaura venda excluída
+     *
+     * @param integer $saleId
+     * @return JsonResponse
+     */
+    public function restore(int $saleId): JsonResponse
     {
         try {
             if (!Sale::withTrashed()->whereId($saleId)->restore()) {
@@ -67,7 +100,13 @@ class SaleController extends Controller
         }
     }
 
-    public function show(Sale $sale)
+    /**
+     * Exibe uma venda específica
+     *
+     * @param Sale $sale
+     * @return JsonResponse
+     */
+    public function show(Sale $sale): JsonResponse
     {
         try {
             return ApiHelper::responseSuccess(['sale' => $sale]);

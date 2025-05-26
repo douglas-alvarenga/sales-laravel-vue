@@ -11,11 +11,22 @@ use App\Http\Requests\StoreEditUserRequest;
 
 class UserController extends Controller
 {
-    public function index()
+    /**
+     * Lista usuários
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         return ApiHelper::responseSuccess(['users' => User::all()]);
     }
 
+    /**
+     * Cadastra usuário
+     *
+     * @param StoreEditUserRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreEditUserRequest $request): JsonResponse
     {
         try {
@@ -29,7 +40,14 @@ class UserController extends Controller
         }
     }
 
-    public function update(StoreEditUserRequest $request, User $user)
+    /**
+     * Atualiza usuário
+     *
+     * @param StoreEditUserRequest $request
+     * @param User $user
+     * @return JsonResponse
+     */
+    public function update(StoreEditUserRequest $request, User $user): JsonResponse
     {
         try {
             if ($request->has('password')) {
@@ -43,6 +61,12 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Remove usuário
+     *
+     * @param User $user
+     * @return JsonResponse
+     */
     public function destroy(User $user): JsonResponse
     {
         try {
@@ -54,7 +78,13 @@ class UserController extends Controller
         }
     }
 
-    public function restore(int $userId)
+    /**
+     * Restaura usuário removido
+     *
+     * @param integer $userId
+     * @return JsonResponse
+     */
+    public function restore(int $userId): JsonResponse
     {
         try {
             if (!User::withTrashed()->whereId($userId)->restore()) {
@@ -68,7 +98,13 @@ class UserController extends Controller
         }
     }
 
-    public function show(User $user)
+    /**
+     * Exibe usuário
+     *
+     * @param User $user
+     * @return JsonResponse
+     */
+    public function show(User $user): JsonResponse
     {
         try {
             return ApiHelper::responseSuccess(['user' => $user]);

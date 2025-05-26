@@ -16,7 +16,7 @@ class AuthController extends Controller
      * @param LoginUserRequest $request
      * @return JsonResponse
      */
-    public function login(LoginUserRequest $request)
+    public function login(LoginUserRequest $request): JsonResponse
     {
         $user = User::orWhere(['username' => $request->login, 'email' => $request->login])->first();
 
@@ -41,13 +41,23 @@ class AuthController extends Controller
         return ApiHelper::responseSuccess(['access_token' => $token, 'user' => $user]);
     }
 
-    public function logout()
+    /**
+     * Realiza o logout do usuário
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
     {
         auth()->logout();
         return ApiHelper::responseSuccess();
     }
 
-    public function me()
+    /**
+     * Retorna usuário logado
+     *
+     * @return JsonResponse
+     */
+    public function me(): JsonResponse
     {
         return response()->json(auth()->user());
     }
