@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: mysql_db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_DATABASE: sales
+            MYSQL_PASSWORD: 123456
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+
+    redis:
+        image: redis:7-alpine
+        container_name: redis_server
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis_data:/data
+
+    mailhog:
+        image: mailhog/mailhog:v1.0.1
+        container_name: mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - VITE_API_URL=http://localhost:8000/api
+        container_name: app_container
+        restart: unless-stopped
+        depends_on:
+            - mysql
+            - redis
+            - mailhog
+        ports:
+            - "8000:80"
+        env_file:
+            - ".env"
+
+volumes:
+    db_data:
+    redis_data:
