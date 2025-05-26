@@ -5,26 +5,35 @@ export function formatDate(strDate, locale = "pt-BR") {
 }
 
 export function formatDatetime(
-    strDate,
-    { locale = "pt-BR", seconds = true } = {}
+    strDate = "",
+    {
+        locale = "pt-BR",
+        seconds = true,
+        toTz = true,
+        tz = "America/Sao_Paulo",
+    } = {}
 ) {
-    const date = new Date(strDate);
+    const isoDate = strDate.endsWith("Z") ? strDate : strDate + "Z";
+    const date = new Date(isoDate);
     if (isNaN(date.getTime())) return "";
 
-    const timeFormat = seconds
-        ? {
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-          }
-        : {
-              hour: "2-digit",
-              minute: "2-digit",
-          };
-    const formattedDate = date.toLocaleDateString(locale);
-    const formattedTime = date.toLocaleTimeString(locale, timeFormat);
+    if (!toTz) {
+        const timeFormat = seconds
+            ? {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+              }
+            : {
+                  hour: "2-digit",
+                  minute: "2-digit",
+              };
+        const formattedDate = date.toLocaleDateString(locale);
+        const formattedTime = date.toLocaleTimeString(locale, timeFormat);
 
-    return `${formattedDate} ${formattedTime}`;
+        return `${formattedDate} ${formattedTime}`;
+    }
+    return date.toLocaleString(locale, { timeZone: tz }).replace(",", "");
 }
 
 export function formatPercent(number, locale = "pt-BR") {

@@ -34,7 +34,7 @@ export default {
     computed: {
         formattedValue() {
             let value = this.modelValue.slice(0, 16)
-            return formatDatetime(value, { seconds: false }).replace(',', '')
+            return formatDatetime(value, { seconds: false, toTz: false }).replace(',', '')
         },
     },
     methods: {
