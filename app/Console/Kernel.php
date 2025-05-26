@@ -19,21 +19,23 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(
             new SendDailySalesReportJob(
-                'seller', Carbon::parse('now', 'America/Sao_Paulo')
+                'seller',
+                Carbon::parse('now', 'America/Sao_Paulo')
                     ->subDay()
                     ->setTimezone('UTC')
                     ->format('Y-m-d')
             )
-        )->everyMinute()->timezone('America/Sao_Paulo')->withoutOverlapping(60)->name('sendDailySalesReportJob:seller')->onOneServer();
+        )->daily()->timezone('America/Sao_Paulo')->withoutOverlapping(60)->name('sendDailySalesReportJob:seller')->onOneServer();
 
         $schedule->job(
             new SendDailySalesReportJob(
-                'admin', Carbon::parse('now', 'America/Sao_Paulo')
+                'admin',
+                Carbon::parse('now', 'America/Sao_Paulo')
                     ->subDay()
                     ->setTimezone('UTC')
                     ->format('Y-m-d')
             )
-        )->everyMinute()->timezone('America/Sao_Paulo')->withoutOverlapping(60)->name('sendDailySalesReportJob:admin')->onOneServer();
+        )->daily()->timezone('America/Sao_Paulo')->withoutOverlapping(60)->name('sendDailySalesReportJob:admin')->onOneServer();
     }
 
     /**
